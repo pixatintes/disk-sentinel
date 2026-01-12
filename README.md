@@ -7,7 +7,6 @@ El seu objectiu principal és **allargar la vida útil dels discos mecànics**, 
 
 Funciona especialment bé en servidors on conviuen:
 
-- SSD de sistema o treball (que no han de fer standby)
 - Discos mecànics de dades fredes
 - Arrays RAID utilitzats només en finestres de backup
 - Discos que només s’accedeixen esporàdicament
