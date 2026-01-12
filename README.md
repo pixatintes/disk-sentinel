@@ -1,28 +1,29 @@
 # Disk Sentinel  
-**NO‑WAKEUP Disk Standby Manager for Debian / Ubuntu / Proxmox**
+**NO‑WAKEUP Disk Standby Manager for Debian / Ubuntu / Proxmox**  
+**Licensed under the GNU General Public License v3 (GPLv3)**
 
-Disk Sentinel és un sistema de gestió intel·ligent de standby per a discs mecànics en entorns Linux basats en Debian.  
-Està dissenyat per **evitar despertar discos innecessàriament**, aplicar **polítiques de standby per-disc**, i detectar **wakeups externs** provocats per altres processos del sistema.
+Disk Sentinel és una eina de gestió intel·ligent de standby per a discs mecànics en sistemes Linux basats en Debian.  
+El seu objectiu principal és **allargar la vida útil dels discos mecànics**, reduint hores de rotació, evitant wakeups innecessaris, minimitzant la temperatura i disminuint el desgast mecànic.
 
 Funciona especialment bé en servidors on conviuen:
 
-- discs SSD de sistema o treball (que no han de fer standby)
-- discs mecànics de dades fredes (música, vídeos, fotos…)
-- arrays RAID utilitzats només en finestres de backup
-- discs que només s’accedeixen esporàdicament
+- SSD de sistema o treball (que no han de fer standby)
+- Discos mecànics de dades fredes
+- Arrays RAID utilitzats només en finestres de backup
+- Discos que només s’accedeixen esporàdicament
 
-Disk Sentinel proporciona un control fi, segur i predictible del comportament dels discs mecànics.
+Disk Sentinel proporciona un control fi, segur i predictible del comportament dels discs mecànics, sense despertar-los mai.
 
 ---
 
 ## ✨ Característiques principals
 
 - **NO-WAKEUP**: mai desperta discos, només els posa en standby.
-- **Temps d’inactivitat per-disc** (IDLE_TIME_sdx).
+- **Temps d’inactivitat per-disc** (`IDLE_TIME_sdx`).
 - **Temps global de fallback**.
 - **Monitoratge en temps real** sense despertar discos.
 - **Monitoratge real** amb `hdparm -C` (pot despertar discos).
-- **Detecció de wakeups externs** (registre al log).
+- **Detecció de wakeups externs** amb registre al log.
 - **Validació i simulació de configuració** (`check`).
 - **Eina d’administració completa** (`disk-sentinel-admin`).
 - **Servei systemd** amb reinici automàtic.
@@ -34,12 +35,29 @@ Disk Sentinel proporciona un control fi, segur i predictible del comportament de
 
 Funciona en qualsevol sistema Linux basat en Debian:
 
-- Debian 10/11/12/13
-- Ubuntu 18/20/22/24
-- Proxmox VE 6/7/8
-- Devuan, Mint, Pop!\_OS, etc.
+- Debian 10/11/12/13  
+- Ubuntu 18/20/22/24  
+- Proxmox VE 6/7/8  
+- ...
 
-No depèn de cap component específic de Proxmox.
+---
+
+## 🎯 Objectiu del projecte
+
+El propòsit de Disk Sentinel és clar:
+
+### ⭐ **Allargar la vida dels discos mecànics.**
+
+Ho aconsegueix:
+
+- reduint hores de rotació  
+- evitant wakeups innecessaris  
+- minimitzant la temperatura  
+- reduint vibració i soroll  
+- disminuint consum  
+- protegint el disc de desgast prematur  
+
+Això és especialment útil en servidors casolans, NAS, Proxmox i sistemes amb dades fredes.
 
 ---
 
@@ -142,25 +160,10 @@ Disk Sentinel:
 
 ## 📄 Llicència
 
-Aquest projecte està sota llicència **MIT**.  
-Consulta el fitxer `LICENSE` per més informació.
+Disk Sentinel is licensed under GPLv3 to ensure that all improvements, modifications, and redistributions of the software remain free and open for the community. This guarantees that the project cannot be closed, privatized, or restricted by third parties.
 
----
+Disk Sentinel is free software released under the GNU General Public License v3 (GPLv3).
+See the LICENSE file for the full text of the license.
 
-## 🤝 Contribucions
 
-Les contribucions són benvingudes:
-
-- millores del monitoratge
-- suport per més tipus de discs
-- integració amb altres eines
-- documentació
-
-Fes un fork i envia un pull request.
-
----
-
-## ⭐ Crèdits
-
-Creat per a entorns Debian/Proxmox que necessiten un control fi i segur del standby dels discs mecànics.
 
