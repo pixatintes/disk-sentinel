@@ -1,0 +1,14 @@
+[Unit]
+Description=Disk Sentinel - Auto Standby NO-WAKEUP + Wake Detection
+After=local-fs.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/disk-sentinel/disk-sentinel.sh
+Restart=always
+RestartSec=30
+Nice=19
+IOSchedulingClass=idle
+
+[Install]
+WantedBy=multi-user.target
