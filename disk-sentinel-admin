@@ -1,0 +1,201 @@
+
+#!/bin/bash
+# ============================================================
+#   Disk Sentinel - Eina d'Administració
+# ============================================================
+
+SERVICE="disk-sentinel"
+CONFIG_FILE="/usr/local/bin/disk-sentinel/config.conf"
+source "$CONFIG_FILE"
+
+# -------------------------
+# Monitor NO-WAKEUP
+# -------------------------
+monitor_safe() {
+    clear
+    echo "👁️  Monitor NO-WAKEUP (estat + I/O + logs)"
+    echo ""
+
+    declare -A io_prev
+
+    while true; do
+        clear
+        echo "🕒 $(date '+%Y-%m-%d %H:%M:%S')"
+        echo ""
+        printf "%-8s %-12s %-12s %-12s\n" "Disc" "Estat" "I/O total" "I/O Δ"
+        echo "------------------------------------------------------"
+
+        for d in "${DISKS[@]}"; do
+            base=$(basename "$d")
+            state=$(cat /sys/block/$base/device/power/runtime_status 2>/dev/null || echo "unknown")
+            io_now=$(grep " $base " /proc/diskstats | awk '{print $6 + $10}')
+
+            if [ -z "${io_prev[$base]}" ]; then
+                io_delta=0
+            else
+                io_delta=$((io_now - io_prev[$base]))
+            fi
+
+            io_prev[$base]=$io_now
+
+            printf "%-8s %-12s %-12s %-12s\n" "$base" "$state" "$io_now" "$io_delta"
+        done
+
+        echo ""
+        echo "📄 Últims 10 logs:"
+        echo "------------------------------"
+        tail -10 "$LOG_FILE" 2>/dev/null || echo "(Encara no hi ha logs)"
+
+        sleep 5
+    done
+}
+
+# -------------------------
+# Monitor REAL (hdparm -C)
+# -------------------------
+monitor_real() {
+    clear
+    echo "⚠️  Monitor REAL (usa hdparm -C, pot despertar discs)"
+    echo ""
+
+    while true; do
+        clear
+        echo "🕒 $(date '+%Y-%m-%d %H:%M:%S')"
+        echo ""
+        printf "%-8s %-20s\n" "Disc" "Estat real"
+        echo "--------------------------------------"
+
+        for d in "${DISKS[@]}"; do
+            echo -n "$(basename "$d"): "
+            hdparm -C "$d" 2>/dev/null | grep "state"
+        done
+
+        sleep 5
+    done
+}
+
+# -------------------------
+# Consulta única (hdparm)
+# -------------------------
+consulta_hdparm() {
+    echo "🕒 $(date '+%Y-%m-%d %H:%M:%S')"
+    echo "🔍 Estat real dels discs:"
+    echo "--------------------------------"
+    for d in "${DISKS[@]}"; do
+        echo -n "$(basename "$d"): "
+        hdparm -C "$d" 2>/dev/null | grep "state"
+    done
+}
+
+# -------------------------
+# Mostrar configuració
+# -------------------------
+config_show() {
+    echo "Configuració actual:"
+    echo "--------------------------------"
+    echo "  IDLE_TIME global: $IDLE_TIME"
+    echo "  MIN_IO: $MIN_IO"
+    echo "  CHECK_INTERVAL: $CHECK_INTERVAL"
+    echo ""
+    echo "  Per-disc:"
+    for d in "${DISKS[@]}"; do
+        base=$(basename "$d")
+        varname="IDLE_TIME_${base}"
+        val="${!varname:-$IDLE_TIME}"
+        echo "    $base → ${val}s"
+    done
+    echo ""
+    echo "  Discs gestionats:"
+    echo "    ${DISKS[@]}"
+}
+
+# -------------------------
+# Validació + Dry-run
+# -------------------------
+check_config() {
+    echo "Validació de configuració:"
+    echo "--------------------------------"
+
+    if ! [[ "$IDLE_TIME" =~ ^[0-9]+$ ]]; then
+        echo "❌ IDLE_TIME global no vàlid"
+    else
+        echo "✔ IDLE_TIME global correcte"
+    fi
+
+    if ! [[ "$MIN_IO" =~ ^[0-9]+$ ]]; then
+        echo "❌ MIN_IO no vàlid"
+    else
+        echo "✔ MIN_IO correcte"
+    fi
+
+    echo ""
+    echo "Per-disc:"
+    for d in "${DISKS[@]}"; do
+        base=$(basename "$d")
+        varname="IDLE_TIME_${base}"
+        if [ -n "${!varname}" ]; then
+            if [[ "${!varname}" =~ ^[0-9]+$ ]]; then
+                echo "✔ $base → ${!varname}s"
+            else
+                echo "❌ $base → valor no vàlid (${!varname})"
+            fi
+        else
+            echo "✔ $base → usa valor global ($IDLE_TIME)"
+        fi
+    done
+
+    echo ""
+    echo "Simulació:"
+    for d in "${DISKS[@]}"; do
+        base=$(basename "$d")
+        varname="IDLE_TIME_${base}"
+        val="${!varname:-$IDLE_TIME}"
+        echo "  $base → standby després de ${val}s"
+    done
+}
+
+# -------------------------
+# Wake-monitor
+# -------------------------
+wake_monitor() {
+    clear
+    echo "⚠️  Monitor de wakeups externs"
+    echo ""
+
+    tail -f "$LOG_FILE" | grep --line-buffered "despertat externament"
+}
+
+# -------------------------
+# Menú
+# -------------------------
+case "$1" in
+    monitor-safe)   monitor_safe ;;
+    monitor-real)   monitor_real ;;
+    consulta)       consulta_hdparm ;;
+    config)         config_show ;;
+    check)          check_config ;;
+    wake-monitor)   wake_monitor ;;
+    start)          systemctl start "$SERVICE" ;;
+    stop)           systemctl stop "$SERVICE" ;;
+    restart)        systemctl restart "$SERVICE" ;;
+    status)         systemctl status "$SERVICE" ;;
+    enable)         systemctl enable "$SERVICE" ;;
+    disable)        systemctl disable "$SERVICE" ;;
+    logs)           tail -f "$LOG_FILE" ;;
+    *)
+        echo "Comandes disponibles:"
+        echo "  monitor-safe     - Monitor NO-WAKEUP (no desperta discos)"
+        echo "  monitor-real     - Monitor amb hdparm -C (pot despertar discos)"
+        echo "  consulta         - Consulta única de l'estat real dels discs"
+        echo "  config           - Mostra la configuració actual"
+        echo "  check            - Validació + simulació (dry-run)"
+        echo "  wake-monitor     - Mostra wakeups externs en temps real"
+        echo "  start            - Inicia el servei Disk Sentinel"
+        echo "  stop             - Atura el servei Disk Sentinel"
+        echo "  restart          - Reinicia el servei Disk Sentinel"
+        echo "  status           - Mostra l'estat del servei"
+        echo "  enable           - Activa el servei en arrencada"
+        echo "  disable          - Desactiva el servei en arrencada"
+        echo "  logs             - Mostra els últims logs del servei"
+        ;;
+esac
