@@ -1,7 +1,6 @@
 #!/bin/bash
 # ============================================================
 #   Disk Sentinel – Desinstal·lador complet
-#   Elimina servei, scripts, configuració i logs
 # ============================================================
 
 set -e
@@ -20,80 +19,59 @@ echo ""
 # ------------------------------------------------------------
 # 1. Aturar i desactivar servei
 # ------------------------------------------------------------
-echo "[1/5] Aturant servei..."
+echo "[1/6] Aturant servei..."
 
-if systemctl is-active --quiet "$SERVICE_NAME"; then
-    systemctl stop "$SERVICE_NAME"
-    echo "  ✔ Servei aturat"
-else
-    echo "  (El servei no estava actiu)"
-fi
+systemctl stop "$SERVICE_NAME" 2>/dev/null || true
+systemctl disable "$SERVICE_NAME" 2>/dev/null || true
 
-if systemctl is-enabled --quiet "$SERVICE_NAME"; then
-    systemctl disable "$SERVICE_NAME"
-    echo "  ✔ Servei desactivat"
-else
-    echo "  (El servei no estava habilitat)"
-fi
-
+echo "  ✔ Servei aturat i desactivat"
 echo ""
 
 # ------------------------------------------------------------
 # 2. Eliminar fitxer de servei
 # ------------------------------------------------------------
-echo "[2/5] Eliminant servei systemd..."
+echo "[2/6] Eliminant servei systemd..."
 
-if [ -f "$SERVICE_FILE" ]; then
-    rm -f "$SERVICE_FILE"
-    echo "  ✔ Fitxer de servei eliminat"
-else
-    echo "  (No existeix cap fitxer de servei)"
-fi
+rm -f "$SERVICE_FILE"
+rm -f /etc/systemd/system/multi-user.target.wants/disk-sentinel.service
 
+echo "  ✔ Fitxer de servei eliminat"
 echo ""
 
 # ------------------------------------------------------------
 # 3. Eliminar scripts i configuració
 # ------------------------------------------------------------
-echo "[3/5] Eliminant scripts i configuració..."
+echo "[3/6] Eliminant scripts i configuració..."
 
-if [ -d "$BASE_DIR" ]; then
-    rm -rf "$BASE_DIR"
-    echo "  ✔ Directori $BASE_DIR eliminat"
-else
-    echo "  (No existeix el directori del programa)"
-fi
+rm -rf "$BASE_DIR"
+rm -f "$ADMIN_TOOL"
 
-if [ -f "$ADMIN_TOOL" ]; then
-    rm -f "$ADMIN_TOOL"
-    echo "  ✔ Eina admin eliminada"
-else
-    echo "  (No existeix l'eina admin)"
-fi
-
+echo "  ✔ Scripts eliminats"
 echo ""
 
 # ------------------------------------------------------------
 # 4. Eliminar logs
 # ------------------------------------------------------------
-echo "[4/5] Eliminant logs..."
+echo "[4/6] Eliminant logs..."
 
-if [ -f "$LOG_FILE" ]; then
-    rm -f "$LOG_FILE"
-    echo "  ✔ Log eliminat"
-else
-    echo "  (No existeix cap log)"
-fi
+rm -f "$LOG_FILE"
 
+echo "  ✔ Logs eliminats"
 echo ""
 
 # ------------------------------------------------------------
 # 5. Reload systemd
 # ------------------------------------------------------------
-echo "[5/5] Actualitzant systemd..."
+echo "[5/6] Actualitzant systemd..."
 
 systemctl daemon-reload
+systemctl reset-failed "$SERVICE_NAME" 2>/dev/null || true
 
+echo "  ✔ systemd actualitzat"
 echo ""
+
+# ------------------------------------------------------------
+# 6. Final
+# ------------------------------------------------------------
 echo "🎉 Desinstal·lació completada!"
 echo "Disk Sentinel ha estat eliminat completament del sistema."
