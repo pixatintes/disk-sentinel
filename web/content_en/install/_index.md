@@ -18,21 +18,31 @@ TocOpen: true
 
 ## 📦 Installation Steps
 
-### 1. Download the project
+### Option A — One-liner (recommended)
+
+Download and run the installer in a single command, no git clone needed:
 
 ```bash
-git clone https://github.com/albert/disk-sentinel.git
-cd disk-sentinel
+curl -fsSL https://raw.githubusercontent.com/pixatintes/disk-sentinel/main/install-disk-sentinel.sh | sudo bash
 ```
 
-### 2. Run the installer
+> No `curl`? Use `wget` instead:
+> ```bash
+> wget -qO- https://raw.githubusercontent.com/pixatintes/disk-sentinel/main/install-disk-sentinel.sh | sudo bash
+> ```
+
+### Option B — Git clone
+
+If you prefer to inspect the code before running it:
 
 ```bash
+git clone https://github.com/pixatintes/disk-sentinel.git
+cd disk-sentinel
 chmod +x install-disk-sentinel.sh
 sudo ./install-disk-sentinel.sh
 ```
 
-The installer will:
+Both options run the same installer, which will:
 
 - Install `hdparm` if not present
 - Copy the main script to `/usr/local/bin/disk-sentinel/`
@@ -41,7 +51,9 @@ The installer will:
 - Create the log file at `/var/log/disk-sentinel.log`
 - Enable and start the service automatically
 
-### 3. Verify the installation
+---
+
+## ✅ Verify the installation
 
 ```bash
 disk-sentinel-admin status

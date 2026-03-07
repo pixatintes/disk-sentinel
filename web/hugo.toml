@@ -1,127 +1,23 @@
 baseURL = "https://disk-sentinel.github.io/"
 title = "Disk Sentinel"
-theme = "PaperMod"
-defaultContentLanguage = "en"
+theme = "hugo-bootstrap-theme"
+
+defaultContentLanguage = "ca"
 defaultContentLanguageInSubdir = true
 
 enableRobotsTXT = true
-buildDrafts = false
-buildFuture = false
-buildExpired = false
+enableEmoji = true
+disableHugoGeneratorInject = true
 
-[minify]
-  disableXML = true
-  minifyOutput = true
+[frontmatter]
+  date = ["date", "publishDate", "lastmod"]
+  lastmod = ["lastmod", ":fileModTime", ":default"]
 
-[languages]
-  [languages.en]
-    languageName = "English"
-    languageCode = "en"
-    weight = 1
-    title = "Disk Sentinel"
-    contentDir = "content_en"
-    [languages.en.params]
-      languageAltTitle = "English"
-      description = "NO-WAKEUP Disk Standby Manager for Debian / Ubuntu / Proxmox"
-    [[languages.en.menus.main]]
-      name = "Home"
-      url = "/en/"
-      weight = 1
-      identifier = "en-home"
-    [[languages.en.menus.main]]
-      name = "Features"
-      url = "/en/features/"
-      weight = 2
-      identifier = "en-features"
-    [[languages.en.menus.main]]
-      name = "Install"
-      url = "/en/install/"
-      weight = 3
-      identifier = "en-install"
-    [[languages.en.menus.main]]
-      name = "Admin Tool"
-      url = "/en/admin/"
-      weight = 4
-      identifier = "en-admin"
-    [[languages.en.menus.main]]
-      name = "Configuration"
-      url = "/en/config/"
-      weight = 5
-      identifier = "en-config"
+[taxonomies]
+  tag = "tags"
+  category = "categories"
 
-  [languages.ca]
-    languageName = "Català"
-    languageCode = "ca"
-    weight = 2
-    title = "Disk Sentinel"
-    contentDir = "content_ca"
-    [languages.ca.params]
-      languageAltTitle = "Català"
-      description = "Gestor de Standby NO-WAKEUP per a Debian / Ubuntu / Proxmox"
-    [[languages.ca.menus.main]]
-      name = "Inici"
-      url = "/ca/"
-      weight = 1
-      identifier = "ca-home"
-    [[languages.ca.menus.main]]
-      name = "Característiques"
-      url = "/ca/features/"
-      weight = 2
-      identifier = "ca-features"
-    [[languages.ca.menus.main]]
-      name = "Instal·lació"
-      url = "/ca/install/"
-      weight = 3
-      identifier = "ca-install"
-    [[languages.ca.menus.main]]
-      name = "Eina Admin"
-      url = "/ca/admin/"
-      weight = 4
-      identifier = "ca-admin"
-    [[languages.ca.menus.main]]
-      name = "Configuració"
-      url = "/ca/config/"
-      weight = 5
-      identifier = "ca-config"
-
-[params]
-  env = "production"
-  title = "Disk Sentinel"
-  description = "NO-WAKEUP Disk Standby Manager for Debian / Ubuntu / Proxmox"
-  keywords = ["disk", "standby", "HDD", "linux", "proxmox", "debian", "ubuntu", "hdparm", "power management"]
-  author = "Disk Sentinel"
-  DateFormat = "January 2, 2006"
-  defaultTheme = "dark"
-  disableThemeToggle = false
-  ShowShareButtons = false
-  ShowReadingTime = false
-  disableSpecial1stPost = false
-  displayFullLangName = true
-  ShowPostNavLinks = true
-  ShowBreadCrumbs = true
-  ShowCodeCopyButtons = true
-  ShowWordCount = false
-  ShowRssButtonInSectionTermList = false
-  UseHugoToc = true
-  disableScrollToTop = false
-  comments = false
-  hidemeta = false
-  hideSummary = false
-  showtoc = true
-  tocopen = false
-
-  [params.homeInfoParams]
-    Title = "💾 Disk Sentinel"
-    Content = """NO‑WAKEUP Disk Standby Manager for Debian / Ubuntu / Proxmox.
-Extend the life of your mechanical hard drives by reducing rotation hours,
-avoiding unnecessary wakeups, and minimizing temperature and wear."""
-
-  [[params.socialIcons]]
-    name = "github"
-    url = "https://github.com/albert/disk-sentinel"
-
-  [params.label]
-    text = "Disk Sentinel"
-
-[outputs]
-  home = ["HTML", "RSS", "JSON"]
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5

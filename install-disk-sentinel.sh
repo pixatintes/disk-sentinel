@@ -51,9 +51,40 @@ echo "  ✔ Directori base: $BASE_DIR"
 echo ""
 
 # ------------------------------------------------------------
-# 3. COPIAR FITXERS DEL REPOSITORI
+# 3. DESCARREGAR FITXERS SI CAL
 # ------------------------------------------------------------
-echo "[3/6] Copiant fitxers del repositori..."
+echo "[3/6] Verificant fitxers del repositori..."
+
+REPO_RAW="https://raw.githubusercontent.com/pixatintes/disk-sentinel/main"
+REQUIRED_FILES=("disk-sentinel.sh" "disk-sentinel-admin" "disk-sentinel.service")
+MISSING=false
+
+for f in "${REQUIRED_FILES[@]}"; do
+    if [ ! -f "./$f" ]; then
+        echo "  - $f no trobat localment, descarregant..."
+        if ! command -v curl >/dev/null 2>&1 && ! command -v wget >/dev/null 2>&1; then
+            echo "  ✘ Error: cal curl o wget per descarregar els fitxers." >&2
+            exit 1
+        fi
+        if command -v curl >/dev/null 2>&1; then
+            curl -fsSL "$REPO_RAW/$f" -o "./$f" || { echo "  ✘ Error descarregant $f" >&2; exit 1; }
+        else
+            wget -q "$REPO_RAW/$f" -O "./$f" || { echo "  ✘ Error descarregant $f" >&2; exit 1; }
+        fi
+        echo "  ✔ $f descarregat"
+        MISSING=true
+    fi
+done
+
+if [ "$MISSING" = false ]; then
+    echo "  ✔ Tots els fitxers presents localment"
+fi
+echo ""
+
+# ------------------------------------------------------------
+# 4. COPIAR FITXERS
+# ------------------------------------------------------------
+echo "[4/6] Copiant fitxers..."
 
 cp ./disk-sentinel.sh "$MAIN_SCRIPT"
 cp ./disk-sentinel-admin "$ADMIN_TOOL"
@@ -66,9 +97,9 @@ echo "  ✔ Scripts copiats"
 echo ""
 
 # ------------------------------------------------------------
-# 4. DETECCIÓ DE DISCS
+# 5. DETECCIÓ DE DISCS
 # ------------------------------------------------------------
-echo "[4/6] Detectant discs..."
+echo "[5/7] Detectant discs..."
 
 get_all_disks() {
     local disks=()
@@ -89,9 +120,9 @@ done
 echo ""
 
 # ------------------------------------------------------------
-# 5. CREAR CONFIGURACIÓ
+# 6. CREAR CONFIGURACIÓ
 # ------------------------------------------------------------
-echo "[5/6] Generant configuració..."
+echo "[6/7] Generant configuració..."
 
 cat > "$CONFIG_FILE" << CONFIG_EOF
 # ============================================================
@@ -123,9 +154,9 @@ echo "  ✔ Configuració creada: $CONFIG_FILE"
 echo ""
 
 # ------------------------------------------------------------
-# 6. ACTIVAR SERVEI
+# 7. ACTIVAR SERVEI
 # ------------------------------------------------------------
-echo "[6/6] Activant servei systemd..."
+echo "[7/7] Activant servei systemd..."
 
 systemctl daemon-reload
 systemctl enable "$SERVICE_NAME"

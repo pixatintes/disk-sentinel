@@ -62,12 +62,31 @@ Això és especialment útil en servidors casolans, NAS, Proxmox i sistemes amb 
 
 ## 📦 Instal·lació
 
-Descarrega i executa l’instal·lador:
+### Opció A — Una sola comanda (recomanat)
+
+Descarrega i executa l'instal·lador directament sense necessitat de clonar el repositori:
 
 ```bash
+curl -fsSL https://raw.githubusercontent.com/pixatintes/disk-sentinel/main/install-disk-sentinel.sh | sudo bash
+```
+
+> Si no tens `curl`, pots usar `wget`:
+> ```bash
+> wget -qO- https://raw.githubusercontent.com/pixatintes/disk-sentinel/main/install-disk-sentinel.sh | sudo bash
+> ```
+
+### Opció B — Git clone
+
+Si prefereixes inspeccionar el codi abans d'executar-lo:
+
+```bash
+git clone https://github.com/pixatintes/disk-sentinel.git
+cd disk-sentinel
 chmod +x install-disk-sentinel.sh
 sudo ./install-disk-sentinel.sh
 ```
+
+---
 
 Això instal·larà:
 

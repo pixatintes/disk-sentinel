@@ -1,33 +1,32 @@
-- id: home
-  translation: "Home"
-- id: features
-  translation: "Features"
-- id: install
-  translation: "Install"
-- id: admin_tool
-  translation: "Admin Tool"
-- id: configuration
-  translation: "Configuration"
 - id: get_started
   translation: "Get Started"
-- id: view_on_github
-  translation: "View on GitHub"
+- id: key_features
+  translation: "Key Features"
+- id: feat_nowakeup
+  translation: "Never wakes up disks — only puts them to sleep. All monitoring is passive via kernel interfaces."
+- id: feat_perdisk_title
+  translation: "Per-Disk Idle Time"
+- id: feat_perdisk
+  translation: "Fine-grained IDLE_TIME_sdx per device. Set to 0 to disable standby for SSDs or system disks."
+- id: feat_safemon_title
+  translation: "Safe Monitoring"
+- id: feat_safemon
+  translation: "Real-time monitoring via /proc/diskstats and sysfs. Zero disk wakeups guaranteed."
+- id: feat_wakeup_title
+  translation: "Wakeup Detection"
+- id: feat_wakeup
+  translation: "Detects and logs external wakeup events with timestamp and device name."
+- id: feat_check_title
+  translation: "Config Validation"
+- id: feat_check
+  translation: "Dry-run simulation with disk-sentinel-admin check before applying any changes."
+- id: feat_systemd_title
+  translation: "Systemd Service"
+- id: feat_systemd
+  translation: "Auto-start on boot, automatic restart on failure, watchdog integration."
 - id: compatibility
   translation: "Compatibility"
-- id: license
-  translation: "License"
-- id: no_wakeup
-  translation: "NO-WAKEUP"
-- id: per_disk_idle
-  translation: "Per-Disk Idle Time"
-- id: realtime_monitor
-  translation: "Real-Time Monitoring"
-- id: wakeup_detection
-  translation: "Wakeup Detection"
-- id: systemd_service
-  translation: "Systemd Service"
-- id: read_more
-  translation: "Read more"
-- id: language
-  translation: "Language"
-
+- id: quick_install
+  translation: "Quick Install"
+- id: install_after
+  translation: "After installation, the service starts automatically."
