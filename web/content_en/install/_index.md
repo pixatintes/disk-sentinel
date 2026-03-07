@@ -110,9 +110,29 @@ See the [Configuration](/en/config/) page for all available options.
 
 To completely remove Disk Sentinel:
 
+{{< tabs >}}
+{{< tab name="curl" >}}
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/pixatintes/disk-sentinel/main/uninstall-disk-sentinel.sh | sudo bash
+```
+
+{{< /tab >}}
+{{< tab name="wget" >}}
+
+```bash
+wget -qO- https://raw.githubusercontent.com/pixatintes/disk-sentinel/main/uninstall-disk-sentinel.sh | sudo bash
+```
+
+{{< /tab >}}
+{{< tab name="Git clone" >}}
+
 ```bash
 chmod +x uninstall-disk-sentinel.sh
 sudo ./uninstall-disk-sentinel.sh
 ```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 This will stop and disable the service, remove all installed files, and optionally the log file.

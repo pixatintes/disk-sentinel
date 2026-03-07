@@ -101,7 +101,32 @@ Consulta la pàgina [Configuració](/ca/config/) per a totes les opcions.
 
 ## 🗑️ Desinstal·lació
 
+Per eliminar completament Disk Sentinel:
+
+{{< tabs >}}
+{{< tab name="curl" >}}
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/pixatintes/disk-sentinel/main/uninstall-disk-sentinel.sh | sudo bash
+```
+
+{{< /tab >}}
+{{< tab name="wget" >}}
+
+```bash
+wget -qO- https://raw.githubusercontent.com/pixatintes/disk-sentinel/main/uninstall-disk-sentinel.sh | sudo bash
+```
+
+{{< /tab >}}
+{{< tab name="Git clone" >}}
+
 ```bash
 chmod +x uninstall-disk-sentinel.sh
 sudo ./uninstall-disk-sentinel.sh
 ```
+
+{{< /tab >}}
+{{< /tabs >}}
+
+Això aturarà i desactivarà el servei, eliminarà tots els fitxers instal·lats i opcionalment el fitxer de log.
+
