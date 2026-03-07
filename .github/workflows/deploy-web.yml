@@ -35,7 +35,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodules: recursive   # fetch PaperMod theme
+          submodules: recursive   # fetch Hugo submodules
           fetch-depth: 0          # full history for .GitInfo / .Lastmod
 
       - name: Setup Go
