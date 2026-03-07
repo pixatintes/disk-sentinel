@@ -1,0 +1,32 @@
+- id: get_started
+  translation: "Comença ara"
+- id: key_features
+  translation: "Característiques principals"
+- id: feat_nowakeup
+  translation: "Mai desperta discos — només els posa en standby. Tot el monitoratge és passiu via interfícies del kernel."
+- id: feat_perdisk_title
+  translation: "Temps d'inactivitat per-disc"
+- id: feat_perdisk
+  translation: "Control fi amb IDLE_TIME_sdx per dispositiu. Posa 0 per desactivar el standby en SSDs o discos de sistema."
+- id: feat_safemon_title
+  translation: "Monitor Segur"
+- id: feat_safemon
+  translation: "Monitoratge en temps real via /proc/diskstats i sysfs. Zero wakeups de disc garantits."
+- id: feat_wakeup_title
+  translation: "Detecció de Wakeups"
+- id: feat_wakeup
+  translation: "Detecta i registra wakeups externs amb timestamp i nom del dispositiu."
+- id: feat_check_title
+  translation: "Validació de Config"
+- id: feat_check
+  translation: "Simulació dry-run amb disk-sentinel-admin check abans d'aplicar cap canvi."
+- id: feat_systemd_title
+  translation: "Servei Systemd"
+- id: feat_systemd
+  translation: "Arrencada automàtica, reinici automàtic en fallada, integració amb watchdog."
+- id: compatibility
+  translation: "Compatibilitat"
+- id: quick_install
+  translation: "Instal·lació ràpida"
+- id: install_after
+  translation: "Després de la instal·lació, el servei s'inicia automàticament."

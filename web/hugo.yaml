@@ -1,0 +1,134 @@
+baseURL: "https://pixatintes.github.io/disk-sentinel/"
+title: "Disk Sentinel"
+
+defaultContentLanguage: "ca"
+defaultContentLanguageInSubdir: true
+
+enableRobotsTXT: true
+enableEmoji: true
+enableInlineShortcodes: true
+
+module:
+  imports:
+    - path: "github.com/imfing/hextra"
+
+languages:
+  en:
+    languageName: "English"
+    languageCode: "en"
+    weight: 1
+    contentDir: "content_en"
+    params:
+      description: "NO-WAKEUP Disk Standby Manager for Debian / Ubuntu / Proxmox"
+    menu:
+      main:
+        - name: "Features"
+          pageRef: "features"
+          weight: 1
+        - name: "Install"
+          pageRef: "install"
+          weight: 2
+        - name: "Admin Tool"
+          pageRef: "admin"
+          weight: 3
+        - name: "Config"
+          pageRef: "config"
+          weight: 4
+        - name: "GitHub"
+          url: "https://github.com/pixatintes/disk-sentinel"
+          weight: 5
+          params:
+            type: "icon"
+            icon: "github"
+        - name: "Search"
+          weight: 6
+          params:
+            type: "search"
+        - name: "theme"
+          weight: 7
+          params:
+            type: "theme-toggle"
+        - weight: 8
+          params:
+            type: "language-switch"
+
+  ca:
+    languageName: "Català"
+    languageCode: "ca"
+    weight: 2
+    contentDir: "content_ca"
+    params:
+      description: "Gestor de Standby NO-WAKEUP per a Debian / Ubuntu / Proxmox"
+    menu:
+      main:
+        - name: "Característiques"
+          pageRef: "features"
+          weight: 1
+        - name: "Instal·lació"
+          pageRef: "install"
+          weight: 2
+        - name: "Eina Admin"
+          pageRef: "admin"
+          weight: 3
+        - name: "Configuració"
+          pageRef: "config"
+          weight: 4
+        - name: "GitHub"
+          url: "https://github.com/pixatintes/disk-sentinel"
+          weight: 5
+          params:
+            type: "icon"
+            icon: "github"
+        - name: "Busca"
+          weight: 6
+          params:
+            type: "search"
+        - name: "tema"
+          weight: 7
+          params:
+            type: "theme-toggle"
+        - weight: 8
+          params:
+            type: "language-switch"
+
+params:
+  description: "NO-WAKEUP Disk Standby Manager for Debian / Ubuntu / Proxmox"
+
+  theme:
+    default: "system"
+    displayToggle: true
+
+  navbar:
+    displayTitle: true
+    displayLogo: false
+    displaySearch: true
+
+  footer:
+    displayCopyright: true
+    displayPoweredBy: false
+
+  page:
+    tabs:
+      sync: false
+    contextMenu:
+      enable: true
+  search:
+    enable: true
+    type: flexsearch
+
+    flexsearch:
+      # index page by: content | summary | heading | title
+      index: content
+markup:
+  highlight:
+    noClasses: false
+  goldmark:
+    renderer:
+      unsafe: true
+
+ignoreLogs:
+  - "warning-goldmark-raw-html"
+
+taxonomies:
+  tag: "tags"
+
