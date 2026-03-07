@@ -1,0 +1,33 @@
+- id: home
+  translation: "Inici"
+- id: features
+  translation: "Característiques"
+- id: install
+  translation: "Instal·lació"
+- id: admin_tool
+  translation: "Eina Admin"
+- id: configuration
+  translation: "Configuració"
+- id: get_started
+  translation: "Comença ara"
+- id: view_on_github
+  translation: "Veure a GitHub"
+- id: compatibility
+  translation: "Compatibilitat"
+- id: license
+  translation: "Llicència"
+- id: no_wakeup
+  translation: "SENSE DESPERTAR"
+- id: per_disk_idle
+  translation: "Temps d'inactivitat per-disc"
+- id: realtime_monitor
+  translation: "Monitoratge en temps real"
+- id: wakeup_detection
+  translation: "Detecció de wakeups"
+- id: systemd_service
+  translation: "Servei Systemd"
+- id: read_more
+  translation: "Llegir més"
+- id: language
+  translation: "Idioma"
+

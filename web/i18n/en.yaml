@@ -1,0 +1,33 @@
+- id: home
+  translation: "Home"
+- id: features
+  translation: "Features"
+- id: install
+  translation: "Install"
+- id: admin_tool
+  translation: "Admin Tool"
+- id: configuration
+  translation: "Configuration"
+- id: get_started
+  translation: "Get Started"
+- id: view_on_github
+  translation: "View on GitHub"
+- id: compatibility
+  translation: "Compatibility"
+- id: license
+  translation: "License"
+- id: no_wakeup
+  translation: "NO-WAKEUP"
+- id: per_disk_idle
+  translation: "Per-Disk Idle Time"
+- id: realtime_monitor
+  translation: "Real-Time Monitoring"
+- id: wakeup_detection
+  translation: "Wakeup Detection"
+- id: systemd_service
+  translation: "Systemd Service"
+- id: read_more
+  translation: "Read more"
+- id: language
+  translation: "Language"
+

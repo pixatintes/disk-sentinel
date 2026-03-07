@@ -1,0 +1,85 @@
+/* Disk Sentinel — Custom styles for PaperMod */
+
+:root {
+  --ds-accent: #4a9eff;
+  --ds-accent-dark: #2d7dd2;
+  --ds-bg-card: rgba(255, 255, 255, 0.04);
+  --ds-border: rgba(255, 255, 255, 0.08);
+}
+
+/* Hero section */
+.home-info {
+  padding: 2.5rem 1.5rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(74, 158, 255, 0.1), rgba(45, 125, 210, 0.05));
+  border: 1px solid var(--ds-border);
+  margin-bottom: 2rem;
+}
+
+.home-info .entry-content {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+/* Code blocks */
+.highlight pre {
+  border-radius: 8px;
+}
+
+/* Tables */
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.post-content table th {
+  background: rgba(74, 158, 255, 0.15);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--ds-accent);
+}
+
+.post-content table td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--ds-border);
+}
+
+.post-content table tr:last-child td {
+  border-bottom: none;
+}
+
+.post-content table tr:hover td {
+  background: var(--ds-bg-card);
+}
+
+/* Blockquotes (warnings) */
+.post-content blockquote {
+  border-left: 4px solid var(--ds-accent);
+  background: rgba(74, 158, 255, 0.08);
+  padding: 1rem 1.25rem;
+  border-radius: 0 8px 8px 0;
+  margin: 1.5rem 0;
+}
+
+/* Section headings */
+.post-content h2 {
+  border-bottom: 1px solid var(--ds-border);
+  padding-bottom: 0.4rem;
+  margin-top: 2.5rem;
+}
+
+/* Inline code badges */
+.post-content p code,
+.post-content li code,
+.post-content td code {
+  background: rgba(74, 158, 255, 0.12);
+  color: var(--ds-accent);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
