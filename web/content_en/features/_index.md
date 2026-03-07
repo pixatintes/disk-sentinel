@@ -3,11 +3,10 @@ title: "Features"
 description: "All Disk Sentinel features in detail"
 date: 2026-03-06
 weight: 1
-showToc: true
-TocOpen: true
+toc: true
 ---
 
-## 🚫 NO-WAKEUP — The Core Principle
+## 💤 NO-WAKEUP — The Core Principle
 
 The fundamental promise of Disk Sentinel: **it will never wake up a disk**.
 

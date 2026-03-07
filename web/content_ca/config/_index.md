@@ -3,8 +3,7 @@ title: "Configuració"
 description: "Referència de configuració de Disk Sentinel"
 date: 2026-03-06
 weight: 4
-showToc: true
-TocOpen: true
+toc: true
 ---
 
 ## Fitxer de configuració

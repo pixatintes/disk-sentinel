@@ -3,8 +3,7 @@ title: "Eina d'Administració"
 description: "Referència de comandes de disk-sentinel-admin"
 date: 2026-03-06
 weight: 3
-showToc: true
-TocOpen: true
+toc: true
 ---
 
 ## 🛠️ disk-sentinel-admin

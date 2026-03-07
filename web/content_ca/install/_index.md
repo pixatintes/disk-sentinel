@@ -3,8 +3,7 @@ title: "Instal·lació"
 description: "Com instal·lar Disk Sentinel"
 date: 2026-03-06
 weight: 2
-showToc: true
-TocOpen: true
+toc: true
 ---
 
 ## 📋 Requisits
@@ -18,21 +17,23 @@ TocOpen: true
 
 ## 📦 Passos d'instal·lació
 
-### Opció A — Una sola comanda (recomanat)
-
+{{< tabs >}}
+{{< tab name="curl" >}}
 Descarrega i executa l'instal·lador directament sense necessitat de clonar el repositori:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/pixatintes/disk-sentinel/main/install-disk-sentinel.sh | sudo bash
 ```
+{{< /tab >}}
 
-> Sense `curl`? Utilitza `wget`:
-> ```bash
-> wget -qO- https://raw.githubusercontent.com/pixatintes/disk-sentinel/main/install-disk-sentinel.sh | sudo bash
-> ```
+{{< tab name="wget" >}}
+Descarrega i executa l'instal·lador directament sense necessitat de clonar el repositori:
 
-### Opció B — Git clone
-
+```bash
+wget -qO- https://raw.githubusercontent.com/pixatintes/disk-sentinel/main/install-disk-sentinel.sh | sudo bash
+```
+{{< /tab >}}
+{{< tab name="Git clone" >}}
 Si prefereixes inspeccionar el codi abans d'executar-lo:
 
 ```bash
@@ -41,6 +42,8 @@ cd disk-sentinel
 chmod +x install-disk-sentinel.sh
 sudo ./install-disk-sentinel.sh
 ```
+{{< /tab >}}
+{{< /tabs >}}
 
 Ambdues opcions executen el mateix instal·lador, que:
 

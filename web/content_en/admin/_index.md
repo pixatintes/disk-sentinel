@@ -3,8 +3,7 @@ title: "Admin Tool"
 description: "disk-sentinel-admin command reference"
 date: 2026-03-06
 weight: 3
-showToc: true
-TocOpen: true
+toc: true
 ---
 
 ## 🛠️ disk-sentinel-admin

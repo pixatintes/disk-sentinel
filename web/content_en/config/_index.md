@@ -3,8 +3,7 @@ title: "Configuration"
 description: "Disk Sentinel configuration reference"
 date: 2026-03-06
 weight: 4
-showToc: true
-TocOpen: true
+toc: true
 ---
 
 ## Configuration File

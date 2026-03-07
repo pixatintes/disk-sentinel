@@ -3,11 +3,10 @@ title: "Característiques"
 description: "Totes les característiques de Disk Sentinel en detall"
 date: 2026-03-06
 weight: 1
-showToc: true
-TocOpen: true
+toc: true
 ---
 
-## 🚫 NO-WAKEUP — El principi fonamental
+## 💤 NO-WAKEUP — El principi fonamental
 
 La promesa fonamental de Disk Sentinel: **mai despertarà un disc**.
 

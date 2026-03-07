@@ -1,79 +1,53 @@
 ---
 title: "Disk Sentinel"
 description: "NO-WAKEUP Disk Standby Manager for Debian / Ubuntu / Proxmox"
-date: 2026-03-06
-layout: "home"
+layout: hextra-home
 ---
 
-## ⭐ Extend the life of your mechanical drives
-
-Disk Sentinel is an intelligent standby management tool for mechanical hard disks on Debian-based Linux systems.
-
-Its primary goal is **to extend the life of mechanical hard drives** by:
-
-- 🔁 Reducing rotation hours
-- 🚫 Avoiding unnecessary wakeups
-- 🌡️ Minimizing temperature
-- 📉 Reducing mechanical wear and vibration
-- 💡 Lowering power consumption
-
----
-
-## 🚀 Key Features
-
-| Feature | Description |
-|---------|-------------|
-| 🚫 **NO-WAKEUP** | Never wakes up disks — only puts them to sleep |
-| ⏱️ **Per-Disk Idle Time** | Fine-grained `IDLE_TIME_sdx` per device |
-| 🔍 **Safe Monitoring** | Real-time monitoring via `/proc/diskstats` — no wakeup |
-| 📡 **Real Monitoring** | Full status with `hdparm -C` |
-| 🔔 **Wakeup Detection** | Detects and logs external wakeup events |
-| ✅ **Config Validation** | `check` command for dry-run simulation |
-| 🛠️ **Admin Tool** | Full-featured `disk-sentinel-admin` CLI |
-| 🔄 **Systemd Service** | Auto-start with watchdog and automatic restart |
-
----
-
-## 🧩 Compatibility
-
-Disk Sentinel works on any Debian-based Linux system:
-
-| Distribution | Versions |
-|-------------|----------|
-| **Debian** | 10 · 11 · 12 · 13 |
-| **Ubuntu** | 18 · 20 · 22 · 24 |
-| **Proxmox VE** | 6 · 7 · 8 |
-
----
-
-## 📦 Quick Install
+<div class="hx:mt-6 hx:mb-6 hx:flex hx:flex-col hx:items-center hx:text-center hx:gap-4 hx:w-full">
+  
+  {{< hextra/hero-headline >}}💾 Disk Sentinel{{< /hextra/hero-headline >}}
+  {{< hextra/hero-subtitle >}}NO‑WAKEUP Disk Standby Manager · Debian · Ubuntu · Proxmox VE{{< /hextra/hero-subtitle >}}
+  <div class="hx:flex hx:gap-3 hx:mt-2">
+    {{< hextra/hero-button text="Get Started →" link="install/" >}}
+    {{< hextra/hero-button text="GitHub" link="https://github.com/pixatintes/disk-sentinel" style="background-color:#24292f" >}}
+  </div>
+  <div class="hx:mt-2">
+{{< tabs >}}
+{{< tab name="curl" >}}
 
 ```bash
+curl -fsSL https://raw.githubusercontent.com/pixatintes/disk-sentinel/main/install-disk-sentinel.sh | sudo bash
+```
+
+{{< /tab >}}
+{{< tab name="wget" >}}
+
+```bash
+wget -qO- https://raw.githubusercontent.com/pixatintes/disk-sentinel/main/install-disk-sentinel.sh | sudo bash
+```
+{{< /tab >}}
+{{< tab name="Git clone" >}}
+
+```bash
+git clone https://github.com/pixatintes/disk-sentinel.git
+cd disk-sentinel
 chmod +x install-disk-sentinel.sh
 sudo ./install-disk-sentinel.sh
 ```
+{{< /tab >}}
+{{< /tabs >}}</div>
+</div>
+</div>
 
-After installation, the service starts automatically. Check its status with:
 
-```bash
-disk-sentinel-admin status
-```
+{{< hextra/feature-grid >}}
+  {{< hextra/feature-card title="💤 NO-WAKEUP" subtitle="Never wakes up disks — only puts them to sleep. All monitoring is done passively via kernel interfaces." >}}
+  {{< hextra/feature-card title="⏱️ Per-Disk Idle Time" subtitle="Fine-grained IDLE_TIME_sdx per device. Set to 0 to disable standby for SSDs or system disks." >}}
+  {{< hextra/feature-card title="🔍 Safe Monitoring" subtitle="Real-time monitoring via /proc/diskstats and sysfs. Zero disk wakeups guaranteed." >}}
+  {{< hextra/feature-card title="🔔 Wakeup Detection" subtitle="Detects and logs external wakeup events with timestamp and device name." >}}
+  {{< hextra/feature-card title="✅ Config Validation" subtitle="Dry-run with disk-sentinel-admin check before applying any changes to the system." >}}
+  {{< hextra/feature-card title="🔄 Systemd Service" subtitle="Auto-start on boot, automatic restart on failure, watchdog integration and persistent logs." >}}
+{{< /hextra/feature-grid >}}
 
----
 
-## 🔍 How It Works
-
-1. Reads real I/O counters from `/proc/diskstats`
-2. Reads disk state from `/sys/block/.../runtime_status`
-3. Detects minimum activity (`MIN_IO` threshold)
-4. Increments an inactivity counter per disk
-5. When the limit is reached → standby via `hdparm -y`
-6. **Never wakes up disks**
-7. Logs external wakeups to the log file
-
----
-
-## 📄 License
-
-Disk Sentinel is free software released under the **GNU General Public License v3 (GPLv3)**.  
-This ensures all improvements and modifications remain free and open for the community.
