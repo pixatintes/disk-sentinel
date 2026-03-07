@@ -58,25 +58,39 @@ echo "[3/6] Verificant fitxers del repositori..."
 REPO_RAW="https://raw.githubusercontent.com/pixatintes/disk-sentinel/main"
 REQUIRED_FILES=("disk-sentinel.sh" "disk-sentinel-admin" "disk-sentinel.service")
 MISSING=false
+TMP_DOWNLOAD_DIR=""
 
+# Primer, comprovem si falten fitxers al directori actual
 for f in "${REQUIRED_FILES[@]}"; do
     if [ ! -f "./$f" ]; then
-        echo "  - $f no trobat localment, descarregant..."
-        if ! command -v curl >/dev/null 2>&1 && ! command -v wget >/dev/null 2>&1; then
-            echo "  ✘ Error: cal curl o wget per descarregar els fitxers." >&2
-            exit 1
-        fi
-        if command -v curl >/dev/null 2>&1; then
-            curl -fsSL "$REPO_RAW/$f" -o "./$f" || { echo "  ✘ Error descarregant $f" >&2; exit 1; }
-        else
-            wget -q "$REPO_RAW/$f" -O "./$f" || { echo "  ✘ Error descarregant $f" >&2; exit 1; }
-        fi
-        echo "  ✔ $f descarregat"
         MISSING=true
     fi
 done
 
-if [ "$MISSING" = false ]; then
+# Si falta algun fitxer, els descarreguem tots a un directori temporal
+if [ "$MISSING" = true ]; then
+    echo "  - Alguns fitxers no es troben localment, descarregant al directori temporal..."
+
+    if ! command -v curl >/dev/null 2>&1 && ! command -v wget >/dev/null 2>&1; then
+        echo "  ✘ Error: cal curl o wget per descarregar els fitxers." >&2
+        exit 1
+    fi
+
+    TMP_DOWNLOAD_DIR="$(mktemp -d)"
+
+    for f in "${REQUIRED_FILES[@]}"; do
+        echo "  - Descarregant $f..."
+        if command -v curl >/dev/null 2>&1; then
+            curl -fsSL "$REPO_RAW/$f" -o "$TMP_DOWNLOAD_DIR/$f" || { echo "  ✘ Error descarregant $f" >&2; exit 1; }
+        else
+            wget -q "$REPO_RAW/$f" -O "$TMP_DOWNLOAD_DIR/$f" || { echo "  ✘ Error descarregant $f" >&2; exit 1; }
+        fi
+        echo "  ✔ $f descarregat"
+    done
+
+    # Ens situem al directori temporal perquè la resta de l'script pugui fer servir ./<fitxer>
+    cd "$TMP_DOWNLOAD_DIR"
+else
     echo "  ✔ Tots els fitxers presents localment"
 fi
 echo ""
